@@ -18,6 +18,7 @@ const AudioPlayer = () => {
   const music = useRef(); // reference the playing animation
 
   useEffect(() => {
+    console.log(audioPlayer?.current?.loadedmetadata);
     const seconds = Math.floor(audioPlayer.current.duration);
     setDuration(seconds);
     progressBar.current.max = seconds;
@@ -47,6 +48,11 @@ const AudioPlayer = () => {
     progressBar.current.value = audioPlayer.current.currentTime;
     changePlayerCurrentTime();
     animationRef.current = requestAnimationFrame(whilePlaying);
+    if (audioPlayer.current.currentTime == audioPlayer.current.duration) {
+      setIsPlaying(false);
+      progressBar.current.style.setProperty("--seek-before-width", `0%`);
+      audioPlayer.current.currentTime = 0;
+    }
   };
 
   const changeRange = () => {
@@ -57,7 +63,7 @@ const AudioPlayer = () => {
   const changePlayerCurrentTime = () => {
     progressBar.current.style.setProperty(
       "--seek-before-width",
-      `${(progressBar.current.value / duration) * 100}%`
+      `${(progressBar.current.value / duration) * 100 + 15}%`
     );
     setCurrentTime(progressBar.current.value);
   };

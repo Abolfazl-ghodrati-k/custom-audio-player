@@ -1,10 +1,51 @@
 .audioPlayer {
-  --primary: #f40082;
-  --secondary: #ffd200;
+  --primary: #15380d;
+  --secondary: #000000;
 
   align-items: center;
   display: flex;
-  width: 700px;
+  flex-direction: column;
+  justify-content: center;
+  width: 300px;
+  padding: 10px;
+  border: 1px solid #000000;
+  border-radius: 10px;
+}
+
+.title {
+  width: 100%;
+  text-align: left;
+  margin-bottom: 10px;
+  font-size: 15px;
+  margin-top: -5px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.cover{
+  width: 280px;
+  height: 200px;
+  background-color: #0f2726;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px 10px 0 0;
+}
+
+.controll{
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.playBar {
+  display: flex;
+  margin-top: 30px;
+  align-items: center;
+  justify-content: center;
 }
 
 .forwardBackward {
@@ -15,10 +56,15 @@
   font-family: monospace;
   font-size: 16px;
   cursor: pointer;
+  margin: 0 10px;
+  transition: all 0.3s;
+  border-radius: 5px;
+  padding: 8px;
+  height: 30px;
 }
 
 .forwardBackward:hover {
-  color: var(--primary);
+  background-color: yellowgreen;
 }
 
 .playPause {
@@ -31,12 +77,12 @@
   color: var(--secondary);
   display: flex;
   justify-content: center;
-  align-items:center;
+  align-items: center;
 }
 
 .play {
   position: relative;
-  left: 5px;
+  left: 3px;
 }
 
 .currentTime,
@@ -45,19 +91,23 @@
   font-size: 16px;
 }
 
+.duration {
+  margin-left: 10px;
+}
+
 .currentTime {
-  margin-left: 25px;
+  margin-right: 5px;
 }
 
 .progressBar {
-  --bar-bg: #ffe3d4;
+  --bar-bg: #397c13;
   --seek-before-width: 0;
-  --seek-before-color: #ffc2a1;
-  --knobby: #3452a5;
-  --selectedKnobby: #26c9c3;
+  --seek-before-color: #000000;
+  --knobby: #1c4b12;
+  --selectedKnobby: #0f2726;
 
   appearance: none;
-  background: var(--bar-bg);;
+  background: var(--bar-bg);
   border-radius: 10px;
   position: relative;
   width: 100%;
@@ -67,7 +117,7 @@
 
 /* progress bar - safari */
 .progressBar::-webkit-slider-runnable-track {
-  background: var(--bar-bg);;
+  background: var(--bar-bg);
   border-radius: 10px;
   position: relative;
   width: 100%;
@@ -77,7 +127,7 @@
 
 /* progress bar - firefox */
 .progressBar::-moz-range-track {
-  background: var(--bar-bg);;
+  background: var(--bar-bg);
   border-radius: 10px;
   position: relative;
   width: 100%;
@@ -91,7 +141,7 @@
 
 /* progress bar - chrome and safari */
 .progressBar::before {
-  content: '';
+  content: "";
   height: 11px;
   width: var(--seek-before-width);
   background-color: var(--seek-before-color);
@@ -151,3 +201,4 @@
   transform: scale(1.2);
   background: var(--selectedKnobby);
 }
+

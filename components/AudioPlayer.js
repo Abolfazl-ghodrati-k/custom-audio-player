@@ -18,7 +18,7 @@ const AudioPlayer = () => {
   const music = useRef(); // reference the playing animation
 
   useEffect(() => {
-    console.log(audioPlayer?.current?.loadedmetadata);
+    // console.log(audioPlayer?.current?.loadedmetadata);
     const seconds = Math.floor(audioPlayer.current.duration);
     setDuration(seconds);
     progressBar.current.max = seconds;
@@ -45,13 +45,20 @@ const AudioPlayer = () => {
   };
 
   const whilePlaying = () => {
+    // console.log(progressBar.current.value);
     progressBar.current.value = audioPlayer.current.currentTime;
+    // console.log(audioPlayer.current.currentTime);
+
     changePlayerCurrentTime();
     animationRef.current = requestAnimationFrame(whilePlaying);
     if (audioPlayer.current.currentTime == audioPlayer.current.duration) {
+      progressBar.current.value = 0
       setIsPlaying(false);
-      progressBar.current.style.setProperty("--seek-before-width", `0%`);
+      progressBar.current.style.setProperty("--seek-before-width", `${0}px`);
       audioPlayer.current.currentTime = 0;
+      setCurrentTime(t => t = 0)
+      audioPlayer.current.pause();
+      cancelAnimationFrame(animationRef.current);
     }
   };
 
@@ -69,35 +76,46 @@ const AudioPlayer = () => {
   };
 
   const backThirty = () => {
-    progressBar.current.value = Number(progressBar.current.value - 30);
+    progressBar.current.value = Number(+progressBar.current.value - 30);
     changeRange();
   };
 
   const forwardThirty = () => {
-    progressBar.current.value = Number(progressBar.current.value + 30);
-    changeRange();
+    progressBar.current.value = Number(+progressBar.current.value + 30);
+    if (+audioPlayer.current.duration - +audioPlayer.current.currentTime < 30) {
+      progressBar.current.value = 0
+      setIsPlaying(false);
+      progressBar.current.style.setProperty("--seek-before-width", `${0}px`);
+      audioPlayer.current.currentTime = 0;
+      setCurrentTime(t => t = 0)
+      audioPlayer.current.pause();
+      cancelAnimationFrame(animationRef.current);
+    } else {
+      changeRange();
+    }
   };
 
   return (
     <div className={styles.audioPlayer}>
       <audio
         ref={audioPlayer}
-        src="https://cdn.simplecast.com/audio/cae8b0eb-d9a9-480d-a652-0defcbe047f4/episodes/af52a99b-88c0-4638-b120-d46e142d06d3/audio/500344fb-2e2b-48af-be86-af6ac341a6da/default_tc.mp3"
+        src="https://dl.dropbox.com/s/tal1ums8maoddw3/%C3%B3lafur%20arnalds%20%26%20shajarian%20mash.mp3"
+        className="dropbox-embed"
         preload="metadata"
       ></audio>
       <div className={styles.cover}></div>
       <div className={styles.title}>
         <p>Title of music</p>
         {isPlaying && (
-          <div class="now playing" ref={music}>
-            <span class="bar n1">A</span>
-            <span class="bar n2">B</span>
-            <span class="bar n3">c</span>
-            <span class="bar n4">D</span>
-            <span class="bar n5">E</span>
-            <span class="bar n6">F</span>
-            <span class="bar n7">G</span>
-            <span class="bar n8">H</span>
+          <div className="now playing" ref={music}>
+            <span className="bar n1">A</span>
+            <span className="bar n2">B</span>
+            <span className="bar n3">c</span>
+            <span className="bar n4">D</span>
+            <span className="bar n5">E</span>
+            <span className="bar n6">F</span>
+            <span className="bar n7">G</span>
+            <span className="bar n8">H</span>
           </div>
         )}
       </div>

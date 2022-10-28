@@ -23,7 +23,7 @@
   align-items: center;
 }
 
-.cover{
+.cover {
   width: 280px;
   height: 200px;
   background-color: #0f2726;
@@ -34,7 +34,7 @@
   border-radius: 10px 10px 0 0;
 }
 
-.controll{
+.controll {
   display: flex;
   width: 100%;
   justify-content: space-between;
@@ -156,6 +156,7 @@
 
 /* progress bar - firefox */
 .progressBar::-moz-range-progress {
+  width: var(--seek-before-width);
   background-color: var(--seek-before-color);
   border-radius: 10px;
   height: 11px;
@@ -200,4 +201,3 @@
   transform: scale(1.2);
   background: var(--selectedKnobby);
 }
-

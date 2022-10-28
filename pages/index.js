@@ -8,6 +8,7 @@ export default function Home() {
       <Head>
         <title>React Audio Player</title>
         <link rel="icon" href="/favicon.ico" />
+        <script type="text/javascript" src="https://www.dropbox.com/static/api/2/dropins.js" id="dropboxjs" data-app-key="YOUR_APP_KEY"></script>
       </Head>
 
       <main className={styles.main}>
